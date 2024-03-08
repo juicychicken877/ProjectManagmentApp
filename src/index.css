@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Your projects section */
+
+.projects {
+    width: 240px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 580px;
+    float: left;
+    background-color: #110D0D;
+}
+
+.projects > h2 {
+    text-transform: uppercase;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.projects > h2:hover {
+    cursor: pointer;
+}
+
+.projects > button {
+    width: 200px;
+    height: 40px;
+}
+
+.projectSection {
+    display: flex;
+    padding-top: 30px;
+    justify-content: start;
+    row-gap: 5px;
+    flex-direction: column;
+}
+
+.projectSection > button {
+    width: 200px;
+    height: 40px;
+    text-align: left;
+}
+
+/* Main window */
+
+.mainWindow {
+    float: left;
+    width: 640px;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    height: 560px;
+    background-color: #eee;
+}
+
+.notSelected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    flex-direction: column;
+}
+
+.notSelected > img {
+    width: 100px;
+    height: 100px;
+}
+
+.notSelected > button {
+    width: 200px;
+    height: 40px;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.buttons > button {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+form {
+    padding-top: 30px;
+}
+
+label {
+    text-transform: uppercase;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.error {
+    font-weight: 900;
+    color: red;
+}
+
+.projectSelected {
+    position: relative;
+}
+
+.projectSelected > p {
+    margin-top: 30px;
+}
+
+.projectSelected > h2 {
+    text-transform: uppercase;
+}
+
+.projectSelected > h2:last-child {
+    margin-top: 20px;
+}
+
+.projectSelected > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.projectSelected > .deleteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 40px;
+}
+
+.projectSelected > input {
+    margin-top: 10px;
+    width: 150px;
+    height: 25px;
+}
+
+.projectSelected > button {
+    height: 25px;
+    margin-left: 10px;
+}
+
+.projectTasks {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.task {
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+.task > p, .task > button {
+    float: left;
+}
+
+.task > p {
+    width: 250px;
+    height: 30px;
+}
+
+.task > button {
+    width: 50px;
+    height: 30px;
+}
+

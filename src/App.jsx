@@ -11,7 +11,12 @@ export default function App() {
         }
     ]);
     const [isProjectSelected, setIsProjectSelected] = useState(false);
-    const [selectedProject, setSelectedProject] = useState({});
+    const [selectedProject, setSelectedProject] = useState({
+        name: '',
+        description: '',
+        dueDate: '',
+        tasks: []
+    });
     const [isCreatingProject, setIsCreatingProject] = useState(false);
     const [showError, setShowError] = useState(false);
 
@@ -79,9 +84,29 @@ export default function App() {
             })
 
             project.tasks.push(taskName);
+
+            setSelectedProject(prevSelectedProject => {
+                return {
+                    ...prevSelectedProject,
+                    tasks: project.tasks
+                }
+            })
         }
 
         taskInput.current.value = '';
+    }
+
+    const handleClearingTask = (task, taskArray) => {
+        let taskPosition = taskArray.indexOf(task);
+
+        taskArray.splice(taskPosition, 1);
+
+        setSelectedProject(prevSelectedProject => {
+            return {
+                ...prevSelectedProject,
+                tasks: taskArray
+            }
+        })
     }
 
     return  <main>
@@ -141,7 +166,7 @@ export default function App() {
                             {selectedProject.tasks.map(task => {
                                 return <div className='task' key={task}>
                                     <p>{task}</p>
-                                    <button>Clear</button>
+                                    <button onClick={() => handleClearingTask(task, selectedProject.tasks)}>Clear</button>
                                 </div>
                             })}
                         </div>

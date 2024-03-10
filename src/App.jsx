@@ -11,12 +11,7 @@ export default function App() {
         }
     ]);
     const [isProjectSelected, setIsProjectSelected] = useState(false);
-    const [selectedProject, setSelectedProject] = useState({
-        name: '',
-        description: '',
-        dueDate: '',
-        tasks: []
-    });
+    const [selectedProject, setSelectedProject] = useState(null);
     const [isCreatingProject, setIsCreatingProject] = useState(false);
     const [showError, setShowError] = useState(false);
 
@@ -109,6 +104,21 @@ export default function App() {
         })
     }
 
+    const handleDeletingProject = (project) => {
+        let projectPosition = projects.find((value, index, array) => {
+            return project.name == value.name && index;
+        })
+
+        setProjects(prevProjects => {
+            return prevProjects.splice(projectPosition, 1);
+        })
+
+        setSelectedProject(null);
+
+        setIsProjectSelected(false);
+
+    }
+
     return  <main>
 
         {/* Your projects section */}
@@ -151,7 +161,7 @@ export default function App() {
             }
             {isProjectSelected && 
                 <div className='projectSelected'>
-                    <button className='deleteButton'>Delete Project</button>
+                    <button className='deleteButton' onClick={() => handleDeletingProject(selectedProject)}>Delete Project</button>
                     <h2>{selectedProject.name}</h2>
                     <span>{selectedProject.dueDate}</span>
                     <p>{selectedProject.description}</p>

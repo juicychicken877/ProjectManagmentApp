@@ -5,10 +5,34 @@ import logo from './assets/images/no-projects.png';
 export default function App() {
     const [projects, setProjects] = useState([
         {
-            name: 'Test Project',
-            description: 'A new way to stay productive',
-            dueDate: '08-07-2007',
-            tasks: []
+            name: '1',
+            description: '1',
+            dueDate: '0001-01-01',
+            tasks: [],
+        },
+        {
+            name: '2',
+            description: '2',
+            dueDate: '0001-01-01',
+            tasks: [],
+        },
+        {
+            name: '3',
+            description: '1',
+            dueDate: '0001-01-01',
+            tasks: [],
+        },
+        {
+            name: '4',
+            description: '1',
+            dueDate: '0001-01-01',
+            tasks: [],
+        },
+        {
+            name: '5',
+            description: '1',
+            dueDate: '0001-01-01',
+            tasks: [],
         }
     ]);
     const [isProjectSelected, setIsProjectSelected] = useState(false);
@@ -37,6 +61,8 @@ export default function App() {
         let name = nameInput.current.value;
         let description = descriptionInput.current.value;
         let date = dateInput.current.value;
+
+        console.log(date);
 
         if (name != '' && description != '' && date != '') {
             handleCreatingProject(name, description, date);
@@ -115,16 +141,13 @@ export default function App() {
     }
 
     const handleDeletingProject = (project) => {
-        let projectPosition = projects.find((value, index, array) => {
-            return project.name == value.name && index;
-        })
+        let projectPosition = projects.indexOf(project);
 
-        setProjects(prevProjects => {
-            return prevProjects.splice(projectPosition, 1);
-        })
+        // delete project
+        projects.splice(projectPosition, 1);
 
+        setProjects(projects);
         setSelectedProject(null);
-
         setIsProjectSelected(false);
 
     }

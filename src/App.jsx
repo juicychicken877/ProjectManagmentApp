@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import ErrorDialog from './components/ErrorDialog.jsx';
 import logo from './assets/images/no-projects.png';
 
 export default function App() {
@@ -13,12 +14,12 @@ export default function App() {
     const [isProjectSelected, setIsProjectSelected] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
     const [isCreatingProject, setIsCreatingProject] = useState(false);
-    const [showError, setShowError] = useState(false);
 
     const nameInput = useRef();
     const descriptionInput = useRef();
     const dateInput = useRef();
     const taskInput = useRef();
+    const errorDialog = useRef();
 
     const handleOpeningForm = () => {
         setIsCreatingProject(true);
@@ -39,11 +40,9 @@ export default function App() {
 
         if (name != '' && description != '' && date != '') {
             handleCreatingProject(name, description, date);
-            handleClosingForm();
-            setShowError(false);
         }
         else {
-            setShowError(true);
+            errorDialog.current.open('Please enter valid data');
         }
     }
 
@@ -61,12 +60,23 @@ export default function App() {
             tasks: []
         }
 
-        setProjects(prevProjects => {
-            return [
-                ...prevProjects,
-                projectObject
-            ]
+        const repetition = projects.find((value, index, array) => {
+            return projectObject.name == value.name
         })
+
+        if (repetition == null) {
+            setProjects(prevProjects => {
+                return [
+                    ...prevProjects,
+                    projectObject
+                ]
+            })
+
+            handleClosingForm();
+        }
+        else {
+            errorDialog.current.open("Project with the same name already exists");
+        }
     }
 
     const handleAddingTask = () => {
@@ -120,6 +130,8 @@ export default function App() {
     }
 
     return  <main>
+        {/* Dialogs */}
+        <ErrorDialog ref={errorDialog} />
 
         {/* Your projects section */}
         <div className='projects'>
@@ -145,7 +157,7 @@ export default function App() {
             {/* Project creation form */}
             {isCreatingProject && <div>
                 <section className='buttons'>
-                    <button onClick={() => {setShowError(false); handleClosingForm()}}>Cancel</button>
+                    <button onClick={() => {handleClosingForm()}}>Cancel</button>
                     <button onClick={handleSaveClick}>Save</button>
                 </section>
                 <form>
@@ -155,7 +167,6 @@ export default function App() {
                     <textarea ref={descriptionInput}></textarea>
                     <label>Due date</label>
                     <input type='date' ref={dateInput}></input>
-                    {showError && <p className='error'>Please enter valid data.</p> }
                 </form>
             </div>
             }

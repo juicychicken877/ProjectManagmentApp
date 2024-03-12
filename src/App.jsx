@@ -1,6 +1,15 @@
 import { useState, useRef } from 'react';
+import Projects from './components/Projects.jsx';
+import NoProjectSelected from './components/NoProjectSelected.jsx';
 import ErrorDialog from './components/ErrorDialog.jsx';
-import logo from './assets/images/no-projects.png';
+import Form from './components/Form.jsx';
+import ProjectView from './components/ProjectView.jsx';
+
+const FORM_VALUES = {
+    nameInput: '',
+    descriptionInput: '',
+    dateInput: '',
+}
 
 export default function App() {
     const [projects, setProjects] = useState([
@@ -35,36 +44,30 @@ export default function App() {
             tasks: [],
         }
     ]);
-    const [isProjectSelected, setIsProjectSelected] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
+    const [formValues, setFormValues] = useState(FORM_VALUES);
     const [isCreatingProject, setIsCreatingProject] = useState(false);
 
-    const nameInput = useRef();
-    const descriptionInput = useRef();
-    const dateInput = useRef();
-    const taskInput = useRef();
     const errorDialog = useRef();
+    const taskInput = useRef();
 
+    /* ---------------------*/
     const handleOpeningForm = () => {
         setIsCreatingProject(true);
-        setSelectedProject({});
-        setIsProjectSelected(false);
+        setSelectedProject(null);
     }
 
     const handleClosingForm = () => {
         setIsCreatingProject(false);
-        setSelectedProject({});
-        setIsProjectSelected(false);
+        setSelectedProject(null);
     }
 
     const handleSaveClick = () => {
-        let name = nameInput.current.value;
-        let description = descriptionInput.current.value;
-        let date = dateInput.current.value;
+        let name = formValues.nameInput;
+        let description = formValues.descriptionInput;
+        let date = formValues.dateInput;
 
-        console.log(date);
-
-        if (name != '' && description != '' && date != '') {
+        if (name && description && date) {
             handleCreatingProject(name, description, date);
         }
         else {
@@ -73,7 +76,6 @@ export default function App() {
     }
 
     const handleSelectingProject = (project) => {
-        setIsProjectSelected(true);
         setSelectedProject(project);
         setIsCreatingProject(false);
     }
@@ -86,18 +88,13 @@ export default function App() {
             tasks: []
         }
 
-        const repetition = projects.find((value, index, array) => {
-            return projectObject.name == value.name
-        })
-
-        if (repetition == null) {
+        if (!findProject(projectObject.name)) {
             setProjects(prevProjects => {
                 return [
                     ...prevProjects,
                     projectObject
                 ]
             })
-
             handleClosingForm();
         }
         else {
@@ -105,32 +102,49 @@ export default function App() {
         }
     }
 
+    const findProject = (projectName) => {
+        let proj = projects.find(value => {
+            return projectName == value.name;
+        })
+
+        return proj;
+    }
+
+    const findTask = (task, taskArray) => {
+        let t = taskArray.find(value => {
+            return task == value;
+        })
+
+        return t;
+    }
+
     const handleAddingTask = () => {
         let taskName = taskInput.current.value;
 
-        if (taskName != '') {
-            // find selected project in projects
-            let project = projects.find((value, index, array) => {
-                return value.name == selectedProject.name;
-            })
+        if (taskName) {
+            let project = findProject(selectedProject.name);
 
-            project.tasks.push(taskName);
+            if (!findTask(taskName, project.tasks)) {
+                project.tasks.push(taskName);
 
-            setSelectedProject(prevSelectedProject => {
-                return {
-                    ...prevSelectedProject,
-                    tasks: project.tasks
-                }
-            })
+                setSelectedProject(prevSelectedProject => {
+                    return {
+                        ...prevSelectedProject,
+                        tasks: project.tasks
+                    }
+                })
+            }
+            else {
+                errorDialog.current.open("Task with the same name already exists");
+            }
         }
 
         taskInput.current.value = '';
     }
 
-    const handleClearingTask = (task, taskArray) => {
-        let taskPosition = taskArray.indexOf(task);
-
-        taskArray.splice(taskPosition, 1);
+    const handleClearingTask = (task) => {
+        let taskArray = selectedProject.tasks;
+        taskArray.splice(taskArray.indexOf(task), 1);
 
         setSelectedProject(prevSelectedProject => {
             return {
@@ -148,74 +162,41 @@ export default function App() {
 
         setProjects(projects);
         setSelectedProject(null);
-        setIsProjectSelected(false);
-
     }
 
     return  <main>
-        {/* Dialogs */}
-        <ErrorDialog ref={errorDialog} />
+        <ErrorDialog 
+            ref={errorDialog} 
+        />
 
-        {/* Your projects section */}
-        <div className='projects'>
-            <h2 onClick={handleClosingForm}>Your Projects</h2>
-            <button onClick={handleOpeningForm}>+ Add Project</button>
-            <section className='projectSection'>
-                {projects.map(project => {
-                    return <button key={project.name} onClick={() => handleSelectingProject(project)}>{project.name}</button>
-                })}
-            </section>
-        </div>
+        <Projects 
+            handleClosingForm={handleClosingForm}
+            handleOpeningForm={handleOpeningForm}
+            handleSelectingProject={handleSelectingProject}
+            projects={projects}
+        />
 
-        {/* Main window */}
         <div className='mainWindow'>
-            {/* Project not selected */}
-            {!isProjectSelected && !isCreatingProject && <div className='notSelected'>
-                    <img src={logo}></img>
-                    <h2>No project selected</h2>
-                    <p>Select a project or start with a new one</p>
-                    <button onClick={handleOpeningForm}>Create new project</button>
-            </div>
+            {!selectedProject && !isCreatingProject && 
+                <NoProjectSelected 
+                    handleOpeningForm={handleOpeningForm}
+                />
             }
-            {/* Project creation form */}
-            {isCreatingProject && <div>
-                <section className='buttons'>
-                    <button onClick={() => {handleClosingForm()}}>Cancel</button>
-                    <button onClick={handleSaveClick}>Save</button>
-                </section>
-                <form>
-                    <label>Title</label>
-                    <input type='text' ref={nameInput}></input>
-                    <label>Description</label>
-                    <textarea ref={descriptionInput}></textarea>
-                    <label>Due date</label>
-                    <input type='date' ref={dateInput}></input>
-                </form>
-            </div>
+            {isCreatingProject && 
+                <Form 
+                    setFormValues={setFormValues}
+                    handleClosingForm={handleClosingForm}
+                    handleSaveClick={handleSaveClick}
+                />
             }
-            {isProjectSelected && 
-                <div className='projectSelected'>
-                    <button className='deleteButton' onClick={() => handleDeletingProject(selectedProject)}>Delete Project</button>
-                    <h2>{selectedProject.name}</h2>
-                    <span>{selectedProject.dueDate}</span>
-                    <p>{selectedProject.description}</p>
-                    <hr></hr>
-                    <h2>Tasks</h2>
-                    <input type='text' ref={taskInput}></input>
-                    <button onClick={handleAddingTask}>Add task</button>
-
-                    {selectedProject.tasks.length <= 0 ? <p>This project does not have any tasks yet.</p> 
-                        :
-                        <div className='projectTasks'>
-                            {selectedProject.tasks.map(task => {
-                                return <div className='task' key={task}>
-                                    <p>{task}</p>
-                                    <button onClick={() => handleClearingTask(task, selectedProject.tasks)}>Clear</button>
-                                </div>
-                            })}
-                        </div>
-                    }
-                </div>
+            {selectedProject && 
+                <ProjectView 
+                    handleAddingTask={handleAddingTask}
+                    handleClearingTask={handleClearingTask}
+                    handleDeletingProject={handleDeletingProject}
+                    selectedProject={selectedProject}
+                    ref={taskInput}
+                />
             }
         </div>
     </main>

@@ -1,0 +1,66 @@
+.projectSelected {
+    position: relative;
+}
+
+.projectSelected > p {
+    margin-top: 30px;
+}
+
+.projectSelected > h2 {
+    text-transform: uppercase;
+}
+
+.projectSelected > h2:last-child {
+    margin-top: 20px;
+}
+
+.projectSelected > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.projectSelected > .deleteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 40px;
+}
+
+.projectSelected > input {
+    margin-top: 10px;
+    width: 150px;
+    height: 25px;
+}
+
+.projectSelected > button {
+    height: 25px;
+    margin-left: 10px;
+}
+
+.projectTasks {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.task {
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+.task > p, .task > button {
+    float: left;
+}
+
+.task > p {
+    width: 250px;
+    height: 30px;
+}
+
+.task > button {
+    width: 50px;
+    height: 30px;
+}

@@ -1,0 +1,40 @@
+/* Your projects section */
+.projects {
+    width: 240px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 580px;
+    float: left;
+    background-color: #110D0D;
+}
+
+.projects > h2 {
+    text-transform: uppercase;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.projects > h2:hover {
+    cursor: pointer;
+}
+
+.projects > button {
+    width: 200px;
+    height: 40px;
+}
+
+.projectSection {
+    display: flex;
+    padding-top: 30px;
+    justify-content: start;
+    row-gap: 5px;
+    flex-direction: column;
+}
+
+.projectSection > button {
+    width: 200px;
+    height: 40px;
+    text-align: left;
+}

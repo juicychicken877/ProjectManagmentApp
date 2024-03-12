@@ -1,4 +1,5 @@
 import { useImperativeHandle, useRef, useState, forwardRef } from 'react';
+import styles from '../assets/css/ErrorDialog.module.css';
 
 const ErrorDialog = forwardRef(function ErrorDialog({}, ref) {
     const [errorText, setErrorText] = useState('Error');
@@ -14,7 +15,7 @@ const ErrorDialog = forwardRef(function ErrorDialog({}, ref) {
         }
     })
 
-    return <dialog ref={dialog} className='errorDialog'>
+    return <dialog ref={dialog} className={styles.errorDialog}>
         <h4>{errorText}</h4>
         <form method='dialog'>
             <button>OK</button>

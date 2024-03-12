@@ -1,0 +1,17 @@
+.notSelected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    flex-direction: column;
+}
+
+.notSelected > img {
+    width: 100px;
+    height: 100px;
+}
+
+.notSelected > button {
+    width: 200px;
+    height: 40px;
+}

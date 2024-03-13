@@ -4,6 +4,7 @@ import NoProjectSelected from './components/NoProjectSelected.jsx';
 import ErrorDialog from './components/ErrorDialog.jsx';
 import Form from './components/Form.jsx';
 import ProjectView from './components/ProjectView.jsx';
+import MainWindow from './components/MainWindow.jsx';
 
 const FORM_VALUES = {
     nameInput: '',
@@ -14,35 +15,11 @@ const FORM_VALUES = {
 export default function App() {
     const [projects, setProjects] = useState([
         {
-            name: '1',
-            description: '1',
-            dueDate: '0001-01-01',
+            name: 'The First Project',
+            description: 'A new way to stay productive',
+            dueDate: '2024-04-01',
             tasks: [],
         },
-        {
-            name: '2',
-            description: '2',
-            dueDate: '0001-01-01',
-            tasks: [],
-        },
-        {
-            name: '3',
-            description: '1',
-            dueDate: '0001-01-01',
-            tasks: [],
-        },
-        {
-            name: '4',
-            description: '1',
-            dueDate: '0001-01-01',
-            tasks: [],
-        },
-        {
-            name: '5',
-            description: '1',
-            dueDate: '0001-01-01',
-            tasks: [],
-        }
     ]);
     const [selectedProject, setSelectedProject] = useState(null);
     const [formValues, setFormValues] = useState(FORM_VALUES);
@@ -168,15 +145,13 @@ export default function App() {
         <ErrorDialog 
             ref={errorDialog} 
         />
-
         <Projects 
             handleClosingForm={handleClosingForm}
             handleOpeningForm={handleOpeningForm}
             handleSelectingProject={handleSelectingProject}
             projects={projects}
         />
-
-        <div className='mainWindow'>
+        <MainWindow>
             {!selectedProject && !isCreatingProject && 
                 <NoProjectSelected 
                     handleOpeningForm={handleOpeningForm}
@@ -198,7 +173,7 @@ export default function App() {
                     ref={taskInput}
                 />
             }
-        </div>
+        </MainWindow>
     </main>
 }
 

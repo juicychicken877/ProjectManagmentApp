@@ -4,14 +4,32 @@
     justify-content: center;
     row-gap: 20px;
     flex-direction: column;
+    margin-top: 100px;
 }
 
 .notSelected > img {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
+}
+
+.notSelected > p {
+    color: #9B9A99;
+}
+
+.notSelected > h2 {
+    color: #414041;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .notSelected > button {
-    width: 200px;
-    height: 40px;
+    background-color: #332E2B;
+    color: #97928F;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
+    font-size: 16px;
 }

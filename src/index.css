@@ -4,19 +4,14 @@
     font-family: 'Lato', sans-serif;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 main {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.mainWindow {
-    float: left;
-    width: 640px;
-    padding-left: 30px;
-    padding-top: 30px;
-    padding-bottom: 10px;
-    padding-right: 30px;
-    height: 560px;
-    background-color: #eee;
 }

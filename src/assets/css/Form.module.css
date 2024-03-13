@@ -3,12 +3,23 @@
     display: flex;
     align-items: center;
     justify-content: end;
+    gap: 10px;
 }
 
 .buttons > button {
-    width: 100px;
-    height: 30px;
-    margin-bottom: 20px;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    text-transform: uppercase;
+}
+
+.buttons > button:last-child {
+    background-color: #332E2B;
+    color: #97928F;
 }
 
 form {
@@ -16,17 +27,30 @@ form {
 }
 
 label {
+    display:block;
+    color: #414041;
     text-transform: uppercase;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+input, textarea {
+    padding-left: 5px;
+    padding-right: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #9B9A99;
+    background-color: rgba(0,0,0,0);
+    margin-bottom: 15px;
 }
 
 input {
-    width: 100%;
     height: 30px;
-    margin-bottom: 15px;
 }
 
-textarea {
-    width: 100%;
-    height: 50px;
-    margin-bottom: 15px;
+textarea {   
+    padding-top: 5px;
+    padding-bottom: 5px;
+    resize: none;
+    height: 60px;
 }

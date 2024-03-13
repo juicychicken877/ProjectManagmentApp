@@ -1,0 +1,11 @@
+.mainWindow {
+    float: left;
+    width: 80vw;
+    height: 100vh;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    background-color: #FAF9FA;
+    box-sizing: border-box;
+}

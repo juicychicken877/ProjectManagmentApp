@@ -7,7 +7,14 @@
 }
 
 .projectSelected > h2 {
+    color: #414041;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.projectSelected > span {
+    color: #9B9A99;
 }
 
 .projectSelected > h2:last-child {
@@ -15,40 +22,60 @@
 }
 
 .projectSelected > hr {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    height: 0px;
+    border: 1px solid #9B9A99;
+    margin-bottom: 25px;
 }
 
 .projectSelected > .deleteButton {
     position: absolute;
     top: 0;
     right: 0;
-    width: 100px;
-    height: 40px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 18px;
+    height: 25px;
+    background-color: rgba(0,0,0,0);
+    text-transform: uppercase;
+    color: red;
 }
 
 .projectSelected > input {
     margin-top: 10px;
-    width: 150px;
-    height: 25px;
+    width: 290px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 30px;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid #9B9A99;
 }
 
 .projectSelected > button {
     height: 25px;
+    text-transform: uppercase;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: none;
+    background-color: rgba(0,0,0,0);
     margin-left: 10px;
 }
 
 .projectTasks {
+    margin-top: 30px;
     display: flex;
     justify-content: start;
     flex-direction: column;
-    row-gap: 2px;
+    row-gap: 8px;
 }
 
 .task {
-    width: 300px;
     height: 30px;
-    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 2px solid #9B9A99;
+    text-transform: capitalize;
 }
 
 .task > p, .task > button {
@@ -56,11 +83,19 @@
 }
 
 .task > p {
-    width: 250px;
+    width: 300px;
+    line-height: 30px;
     height: 30px;
+    overflow: hidden;
 }
 
 .task > button {
-    width: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 10px;
+    border: none;
+    color: red;
+    text-transform: uppercase;
+    background-color: rgba(0,0,0,0);
     height: 30px;
 }

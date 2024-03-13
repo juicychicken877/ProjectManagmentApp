@@ -46,6 +46,7 @@ export default function App() {
 
         if (name && description && date) {
             handleCreatingProject(name, description, date);
+            setFormValues(FORM_VALUES);
         }
         else {
             errorDialog.current.open('Please enter valid data');

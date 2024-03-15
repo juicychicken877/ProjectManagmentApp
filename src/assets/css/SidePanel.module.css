@@ -1,0 +1,8 @@
+.sidePanel {
+    border-top: 1px solid #97928F;
+    padding-top: 30px;
+    gap: 5px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+}

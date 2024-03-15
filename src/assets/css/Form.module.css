@@ -8,18 +8,11 @@
 
 .buttons > button {
     font-size: 18px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: none;
-    background-color: rgba(0,0,0,0);
-    text-transform: uppercase;
 }
 
-.buttons > button:last-child {
-    background-color: #332E2B;
-    color: #97928F;
+.buttons > button:first-child {
+    background-color: rgba(0,0,0,0);
+    color: black;
 }
 
 form {

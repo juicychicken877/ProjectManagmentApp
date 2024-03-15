@@ -6,13 +6,15 @@ const ProjectView = forwardRef(function ProjectView({ handleDeletingProject, han
     {/* Project selected */}
     return <div className={styles.projectSelected}>
         <button className={styles.deleteButton} onClick={() => handleDeletingProject(selectedProject)}>Delete</button>
-        <h2>{selectedProject.name}</h2>
+        <h2 className='header'>{selectedProject.name}</h2>
         <span>{selectedProject.dueDate}</span>
         <p>{selectedProject.description}</p>
         <hr></hr>
-        <h2>Tasks</h2>
+        <h2 className='header'><span className='icon-list'></span> Tasks</h2>
         <input type='text' ref={ref}></input>
-        <button onClick={handleAddingTask}>+ Add</button>
+        <button onClick={handleAddingTask}>
+            <span className='icon-plus'></span>
+        </button>
 
         {selectedProject.tasks.length <= 0 ? <p>This project does not have any tasks yet.</p> 
             :
@@ -20,7 +22,7 @@ const ProjectView = forwardRef(function ProjectView({ handleDeletingProject, han
                 {selectedProject.tasks.map(task => {
                     return <div className={styles.task} key={task}>
                         <p>{task}</p>
-                        <button onClick={() => handleClearingTask(task, selectedProject.tasks)}>Clear</button>
+                        <button onClick={() => handleClearingTask(task, selectedProject.tasks)}><span className='icon-trash'></span></button>
                     </div>
                 })}
             </div>

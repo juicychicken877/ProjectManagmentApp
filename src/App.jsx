@@ -5,6 +5,8 @@ import ErrorDialog from './components/ErrorDialog.jsx';
 import Form from './components/Form.jsx';
 import ProjectView from './components/ProjectView.jsx';
 import MainWindow from './components/MainWindow.jsx';
+import Settings from './components/side_panel/Settings.jsx';
+import Dashboard from './components/side_panel/Dashboard.jsx';
 
 const FORM_VALUES = {
     nameInput: '',
@@ -15,28 +17,28 @@ const FORM_VALUES = {
 export default function App() {
     const [projects, setProjects] = useState([
         {
-            name: 'The First Project',
-            description: 'A new way to stay productive',
-            dueDate: '2024-04-01',
-            tasks: [],
-        },
+            name: 'Text Project Example',
+            description: 'Project for testing and development',
+            dueDate: '2025-01-01',
+            tasks: [
+                'Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5'
+            ]
+        }
     ]);
     const [selectedProject, setSelectedProject] = useState(null);
     const [formValues, setFormValues] = useState(FORM_VALUES);
-    const [isCreatingProject, setIsCreatingProject] = useState(false);
+    const [currentOpenTab, setCurrentOpenTab] = useState(null);
+    const [activeButton, setActiveButton] = useState(null);
 
     const errorDialog = useRef();
     const taskInput = useRef();
 
     /* ---------------------*/
-    const handleOpeningForm = () => {
-        setIsCreatingProject(true);
-        setSelectedProject(null);
-    }
+    const handleOpenTab = (tab) => {
+        setCurrentOpenTab(tab);
 
-    const handleClosingForm = () => {
-        setIsCreatingProject(false);
-        setSelectedProject(null);
+        if (tab === null || tab === 'FORM')
+            setActiveButton(null);
     }
 
     const handleSaveClick = () => {
@@ -55,7 +57,7 @@ export default function App() {
 
     const handleSelectingProject = (project) => {
         setSelectedProject(project);
-        setIsCreatingProject(false);
+        handleOpenTab('PROJECTVIEW');
     }
 
     const handleCreatingProject = (projectName, projectDescription, date) => {
@@ -73,7 +75,7 @@ export default function App() {
                     projectObject
                 ]
             })
-            handleClosingForm();
+            handleOpenTab(null);
         }
         else {
             errorDialog.current.open("Project with the same name already exists");
@@ -138,6 +140,8 @@ export default function App() {
         // delete project
         projects.splice(projectPosition, 1);
 
+        setCurrentOpenTab(null);
+        setActiveButton(null);
         setProjects(projects);
         setSelectedProject(null);
     }
@@ -147,25 +151,36 @@ export default function App() {
             ref={errorDialog} 
         />
         <Projects 
-            handleClosingForm={handleClosingForm}
-            handleOpeningForm={handleOpeningForm}
+            handleOpenTab={handleOpenTab}
             handleSelectingProject={handleSelectingProject}
+            setActiveButton={setActiveButton}
+            activeButton={activeButton}
             projects={projects}
         />
         <MainWindow>
-            {!selectedProject && !isCreatingProject && 
+            {currentOpenTab === null && 
                 <NoProjectSelected 
-                    handleOpeningForm={handleOpeningForm}
+                    handleOpenTab={handleOpenTab}
                 />
             }
-            {isCreatingProject && 
+            {currentOpenTab === 'FORM' && 
                 <Form 
                     setFormValues={setFormValues}
-                    handleClosingForm={handleClosingForm}
+                    handleOpenTab={handleOpenTab}
                     handleSaveClick={handleSaveClick}
                 />
             }
-            {selectedProject && 
+            {currentOpenTab === 'SETTINGS' &&
+                <Settings 
+                
+                />
+            }
+            {currentOpenTab === 'DASHBOARD' &&
+                <Dashboard 
+                
+                />
+            }
+            {currentOpenTab === 'PROJECTVIEW' && 
                 <ProjectView 
                     handleAddingTask={handleAddingTask}
                     handleClearingTask={handleClearingTask}

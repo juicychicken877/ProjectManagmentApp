@@ -21,15 +21,3 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
-.notSelected > button {
-    background-color: #332E2B;
-    color: #97928F;
-    border: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-top: 15px;
-    font-size: 16px;
-}

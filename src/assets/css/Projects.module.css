@@ -11,9 +11,7 @@
 }
 
 .projects > h2 {
-    text-transform: uppercase;
     color: #eee;
-    letter-spacing: 1px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -22,38 +20,11 @@
     cursor: pointer;
 }
 
-.projects > button {
-    background-color: #332E2B;
-    color: #97928F;
-    border: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 16px;
-}
-
 .projectSection {
     display: flex;
     padding-top: 50px;
+    padding-bottom: 30px;
     justify-content: start;
     row-gap: 5px;
     flex-direction: column;
-}
-
-.projectSection > button {
-    background-color: rgba(0,0,0,0);
-    color: #97928F;
-    overflow: hidden;
-    padding-left: 10px;
-    font-size: 16px;
-    border: none;
-    width: 200px;
-    height: 40px;
-    text-align: left;
-    border-left: 2px solid #332E2B;
-}
-
-.active {
-    border-left: 2px solid #75706E;
 }

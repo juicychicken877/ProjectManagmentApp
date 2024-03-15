@@ -6,13 +6,6 @@
     margin-top: 30px;
 }
 
-.projectSelected > h2 {
-    color: #414041;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-}
-
 .projectSelected > span {
     color: #9B9A99;
 }
@@ -40,6 +33,10 @@
     background-color: rgba(0,0,0,0);
     text-transform: uppercase;
     color: red;
+}
+
+.projectSelected > button > span {
+    font-size: 20px;
 }
 
 .projectSelected > input {
@@ -75,7 +72,6 @@
     padding-left: 5px;
     padding-right: 5px;
     border-left: 2px solid #9B9A99;
-    text-transform: capitalize;
 }
 
 .task > p, .task > button {
@@ -95,7 +91,7 @@
     margin-left: 10px;
     border: none;
     color: red;
-    text-transform: uppercase;
     background-color: rgba(0,0,0,0);
     height: 30px;
+    font-size: 20px;
 }

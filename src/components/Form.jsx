@@ -1,6 +1,7 @@
 import styles from '../assets/css/Form.module.css';
+import Button from './buttons/Button.jsx';
 
-export default function Form({handleClosingForm, setFormValues, handleSaveClick }) {
+export default function Form({ handleOpenTab, setFormValues, handleSaveClick }) {
     /* Input onChange methods */
     const changeName = (eventTarget) => {
         setFormValues(prevFormValues => {
@@ -29,8 +30,8 @@ export default function Form({handleClosingForm, setFormValues, handleSaveClick 
     {/* Project creation form */}
     return <div>
         <section className={styles.buttons}>
-            <button onClick={() => {handleClosingForm()}}>Cancel</button>
-            <button onClick={handleSaveClick}>Save</button>
+            <Button onClick={() => handleOpenTab(null)}>Cancel</Button>
+            <Button onClick={() => handleSaveClick()}>Save</Button>
         </section>
         <form>
             <label>Title</label>

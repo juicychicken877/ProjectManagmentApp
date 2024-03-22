@@ -16,10 +16,6 @@
     margin-bottom: 20px;
 }
 
-.projects > h2:hover {
-    cursor: pointer;
-}
-
 .projectSection {
     display: flex;
     padding-top: 50px;

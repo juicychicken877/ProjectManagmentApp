@@ -1,5 +1,6 @@
 import styles from '../assets/css/Form.module.css';
 import Button from './buttons/Button.jsx';
+import { DEFAULT_TAB } from '../App.jsx';
 
 export default function Form({ handleOpenTab, setFormValues, handleSaveClick }) {
     /* Input onChange methods */
@@ -30,7 +31,7 @@ export default function Form({ handleOpenTab, setFormValues, handleSaveClick }) 
     {/* Project creation form */}
     return <div>
         <section className={styles.buttons}>
-            <Button onClick={() => handleOpenTab(null)}>Cancel</Button>
+            <Button onClick={() => handleOpenTab(DEFAULT_TAB)}>Cancel</Button>
             <Button onClick={() => handleSaveClick()}>Save</Button>
         </section>
         <form>

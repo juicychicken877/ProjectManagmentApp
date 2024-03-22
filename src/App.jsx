@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react';
 import Projects from './components/Projects.jsx';
-import NoProjectSelected from './components/NoProjectSelected.jsx';
 import ErrorDialog from './components/ErrorDialog.jsx';
 import Form from './components/Form.jsx';
 import ProjectView from './components/ProjectView.jsx';
 import MainWindow from './components/MainWindow.jsx';
 import Settings from './components/side_panel/Settings.jsx';
 import Dashboard from './components/side_panel/Dashboard.jsx';
+
+export const DEFAULT_TAB = 'DASHBOARD';
 
 const FORM_VALUES = {
     nameInput: '',
@@ -21,14 +22,14 @@ export default function App() {
             description: 'Project for testing and development',
             dueDate: '2025-01-01',
             tasks: [
-                'Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5'
+                'Eat', 'Sleep', 'Gym', 'Code', 'Play'
             ]
         }
     ]);
     const [selectedProject, setSelectedProject] = useState(null);
     const [formValues, setFormValues] = useState(FORM_VALUES);
-    const [currentOpenTab, setCurrentOpenTab] = useState(null);
-    const [activeButton, setActiveButton] = useState(null);
+    const [currentOpenTab, setCurrentOpenTab] = useState(DEFAULT_TAB);
+    const [activeButton, setActiveButton] = useState(DEFAULT_TAB);
 
     const errorDialog = useRef();
     const taskInput = useRef();
@@ -37,8 +38,11 @@ export default function App() {
     const handleOpenTab = (tab) => {
         setCurrentOpenTab(tab);
 
-        if (tab === null || tab === 'FORM')
+        if (tab == 'FORM')
             setActiveButton(null);
+
+        if (tab == DEFAULT_TAB)
+            setActiveButton(DEFAULT_TAB);
     }
 
     const handleSaveClick = () => {
@@ -56,6 +60,7 @@ export default function App() {
     }
 
     const handleSelectingProject = (project) => {
+        setActiveButton(project.name);
         setSelectedProject(project);
         handleOpenTab('PROJECTVIEW');
     }
@@ -75,7 +80,7 @@ export default function App() {
                     projectObject
                 ]
             })
-            handleOpenTab(null);
+            handleOpenTab(DEFAULT_TAB);
         }
         else {
             errorDialog.current.open("Project with the same name already exists");
@@ -140,8 +145,7 @@ export default function App() {
         // delete project
         projects.splice(projectPosition, 1);
 
-        setCurrentOpenTab(null);
-        setActiveButton(null);
+        handleOpenTab(DEFAULT_TAB);
         setProjects(projects);
         setSelectedProject(null);
     }
@@ -158,11 +162,6 @@ export default function App() {
             projects={projects}
         />
         <MainWindow>
-            {currentOpenTab === null && 
-                <NoProjectSelected 
-                    handleOpenTab={handleOpenTab}
-                />
-            }
             {currentOpenTab === 'FORM' && 
                 <Form 
                     setFormValues={setFormValues}
@@ -177,7 +176,8 @@ export default function App() {
             }
             {currentOpenTab === 'DASHBOARD' &&
                 <Dashboard 
-                
+                    handleSelectingProject={handleSelectingProject}
+                    projects={projects}
                 />
             }
             {currentOpenTab === 'PROJECTVIEW' && 

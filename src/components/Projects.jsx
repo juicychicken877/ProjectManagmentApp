@@ -13,7 +13,7 @@ export default function Projects({ handleOpenTab, handleSelectingProject, active
 
     {/* Your projects section */}
     return <div className={styles.projects}>
-        <h2 className='header' onClick={() => handleOpenTab(null)}>Your Projects</h2>
+        <h2 className='header'>Your Projects</h2>
         <Button onClick={() => handleOpenTab('FORM')}>
             <span className='icon-plus'></span>
             Add Project

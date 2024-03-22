@@ -64,3 +64,47 @@ main {
 .buttonActive {
     background-color: #332E2B;
 }
+
+/* Dashboard */
+.dashboard {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+}
+
+.dashboard-project {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    box-sizing: border-box;
+    border-left: 2px solid #332E2B;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    transition: 0.15s all ease-in-out;
+}
+
+.dashboard-project:hover {
+    color: #97928F;
+    background-color: #332E2B;
+}
+
+.dashboard-project-name {
+    width: 25%;
+}
+
+.dashboard-project > div {
+    float: left;
+    overflow: hidden;
+}
+
+.dashboard-project-description {
+    width: 35%;
+}
+
+.dashboard-project-date, .dashboard-project-taskcount {
+    text-align: right;
+    width: 20%;
+}
